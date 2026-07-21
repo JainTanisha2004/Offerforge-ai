@@ -1,0 +1,22 @@
+// Basic button styles
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #d20d3b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.button--ghost {
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.button:active {
+  transform: scale(0.95);
+}

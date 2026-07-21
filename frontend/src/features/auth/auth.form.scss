@@ -1,0 +1,132 @@
+main {
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(210, 13, 59, 0.16), transparent 30%);
+    z-index: 0;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 20px 12px 12px;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ffffff, #ff7aa2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .form {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 430px);
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.5rem;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    animation: fadeUp 0.7s ease both;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+    }
+
+    input {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      outline: none;
+      padding-inline: 1rem;
+      padding-block: 0.8rem;
+      border-radius: 0.9rem;
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      transition: all 0.25s ease;
+
+      &::placeholder {
+        color: #94a3b8;
+      }
+
+      &:focus {
+        border-color: #d20d3b;
+        box-shadow: 0 0 0 4px rgba(210, 13, 59, 0.2);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .button {
+    margin-top: 0.5rem;
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    box-shadow: 0 12px 24px rgba(210, 13, 59, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 28px rgba(210, 13, 59, 0.35);
+    }
+  }
+
+  p {
+    margin-top: 1rem;
+    text-align: center;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+  }
+
+  a {
+    color: #ff5f88;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #ff9fb8;
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(18px, -20px) scale(1.06);
+  }
+}

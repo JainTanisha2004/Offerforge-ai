@@ -1,0 +1,991 @@
+// ========================================
+// COLORS
+// ========================================
+
+$bg-page:#080d17;
+$bg-card:#111827;
+$bg-card-light:#182233;
+$bg-input:#1d2a3d;
+
+$text:#f8fafc;
+$text-light:#94a3b8;
+
+$accent:#ff2d78;
+$accent-light:rgba(255,45,120,.12);
+
+$green:#22c55e;
+$orange:#f59e0b;
+$red:#ef4444;
+
+$border:rgba(255,255,255,.08);
+
+
+// ========================================
+// RESET
+// ========================================
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:
+        "Inter",
+        system-ui,
+        sans-serif;
+
+    background:$bg-page;
+
+    color:$text;
+}
+
+
+// ========================================
+// PAGE
+// ========================================
+
+.interview-page{
+
+    min-height:100vh;
+
+    padding:28px;
+
+    background:
+
+        radial-gradient(circle at top left,
+            rgba(255,45,120,.10),
+            transparent 28%),
+
+        radial-gradient(circle at bottom right,
+            rgba(95,111,255,.08),
+            transparent 35%),
+
+        linear-gradient(
+            140deg,
+            #070b14,
+            #0d1627,
+            #131d30
+        );
+
+}
+
+
+
+// ========================================
+// MAIN LAYOUT
+// ========================================
+
+.layout{
+
+    width:100%;
+
+    max-width:1700px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+
+        220px
+
+        minmax(850px,1fr)
+
+        260px;
+
+    gap:24px;
+
+    align-items:start;
+
+}
+
+
+
+// ========================================
+// COMMON CARD
+// ========================================
+
+.sidebar,
+.content,
+.right-panel{
+
+    background:$bg-card;
+
+    border:1px solid $border;
+
+    border-radius:22px;
+
+    box-shadow:
+
+        0 15px 40px rgba(0,0,0,.28);
+
+}
+
+
+
+// ========================================
+// SIDEBAR
+// ========================================
+
+.sidebar{
+
+    position:sticky;
+
+    top:28px;
+
+    padding:28px;
+
+    height:fit-content;
+
+}
+
+.sidebar h5{
+
+    color:$text-light;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    font-size:.75rem;
+
+    margin-bottom:24px;
+
+}
+
+
+
+// ========================================
+// NAVIGATION
+// ========================================
+
+.nav-btn{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    background:transparent;
+
+    color:$text-light;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:0 18px;
+
+    cursor:pointer;
+
+    font-size:.95rem;
+
+    transition:.3s;
+
+    margin-bottom:10px;
+
+}
+
+.nav-btn svg{
+
+    font-size:18px;
+
+}
+
+.nav-btn:hover{
+
+    background:$bg-card-light;
+
+    color:white;
+
+    transform:translateX(5px);
+
+}
+
+.nav-btn.active{
+
+    background:$accent-light;
+
+    color:$accent;
+
+    border:1px solid rgba(255,45,120,.25);
+
+    box-shadow:
+
+        0 10px 25px rgba(255,45,120,.12);
+
+}
+
+
+
+// ========================================
+// DOWNLOAD BUTTON
+// ========================================
+
+.download-btn{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    margin-top:30px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff2d78,
+            #ff5d98
+        );
+
+    color:white;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.3s;
+
+}
+
+.download-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+        0 15px 35px rgba(255,45,120,.28);
+
+}
+
+
+
+// ========================================
+// CONTENT
+// ========================================
+
+.content{
+
+    padding:40px;
+
+    min-height:calc(100vh - 56px);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+// ========================================
+// HEADER
+// ========================================
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:32px;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid $border;
+
+}
+
+.section-header-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.section-header h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    letter-spacing:-1px;
+
+}
+
+.section-header p{
+
+    color:$text-light;
+
+    font-size:.92rem;
+
+}
+
+.section-header span{
+
+    background:$bg-card-light;
+
+    border:1px solid $border;
+
+    color:$text-light;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+}
+
+
+
+// ========================================
+// QUESTION LIST
+// ========================================
+
+.questions{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+
+
+// ========================================
+// RIGHT PANEL
+// ========================================
+
+.right-panel{
+
+    position:sticky;
+
+    top:28px;
+
+    padding:26px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+    height:fit-content;
+
+}
+
+// =====================================================
+// QUESTIONS CONTAINER
+// =====================================================
+
+.questions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+    width:100%;
+
+}
+
+
+
+// =====================================================
+// QUESTION CARD
+// =====================================================
+
+.question-card{
+
+    width:100%;
+
+    background:$bg-card-light;
+
+    border:1px solid $border;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+.question-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:rgba(255,45,120,.35);
+
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.25);
+
+}
+
+.question-card.open{
+
+    border-color:$accent;
+
+    box-shadow:
+        0 18px 35px rgba(255,45,120,.18);
+
+}
+
+
+
+// =====================================================
+// HEADER
+// =====================================================
+
+.question-card__header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:24px;
+
+    cursor:pointer;
+
+}
+
+.question-card__left{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    flex:1;
+
+}
+
+
+
+// =====================================================
+// QUESTION NUMBER
+// =====================================================
+
+.question-number{
+
+    width:44px;
+
+    height:44px;
+
+    min-width:44px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #ff2d78,
+        #ff5d98
+    );
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    box-shadow:
+        0 10px 18px rgba(255,45,120,.25);
+
+}
+
+
+
+// =====================================================
+// QUESTION CONTENT
+// =====================================================
+
+.question-content{
+
+    flex:1;
+
+}
+
+.question-content p{
+
+    color:$text;
+
+    font-size:1rem;
+
+    line-height:1.75;
+
+    font-weight:500;
+
+}
+
+
+
+// =====================================================
+// QUESTION META
+// =====================================================
+
+.question-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:14px;
+
+    flex-wrap:wrap;
+
+}
+
+.question-meta span{
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:.75rem;
+
+    font-weight:600;
+
+    background:#243246;
+
+    color:$text-light;
+
+}
+
+.question-meta .easy{
+
+    background:rgba(34,197,94,.15);
+
+    color:$green;
+
+}
+
+.question-meta .medium{
+
+    background:rgba(245,158,11,.15);
+
+    color:$orange;
+
+}
+
+.question-meta .hard{
+
+    background:rgba(239,68,68,.15);
+
+    color:$red;
+
+}
+
+
+
+// =====================================================
+// CHEVRON
+// =====================================================
+
+.chevron{
+
+    font-size:22px;
+
+    color:$text-light;
+
+    transition:.35s ease;
+
+}
+
+.rotate{
+
+    transform:rotate(180deg);
+
+    color:$accent;
+
+}
+
+
+
+// =====================================================
+// BODY
+// =====================================================
+
+.question-card__body{
+
+    border-top:1px solid $border;
+
+    padding:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    animation:accordionOpen .3s ease;
+
+}
+
+
+
+// =====================================================
+// ANSWER BOX
+// =====================================================
+
+.answer-box{
+
+    background:$bg-input;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-left:4px solid $accent;
+
+    border-radius:14px;
+
+    padding:22px;
+
+}
+
+.answer-box h5{
+
+    color:$accent;
+
+    font-size:.92rem;
+
+    margin-bottom:14px;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+}
+
+.answer-box p{
+
+    color:$text-light;
+
+    line-height:1.85;
+
+    font-size:.94rem;
+
+}
+
+
+
+// =====================================================
+// CODE BLOCK (OPTIONAL)
+// =====================================================
+
+.answer-box pre{
+
+    margin-top:16px;
+
+    background:#101827;
+
+    border-radius:10px;
+
+    padding:16px;
+
+    overflow-x:auto;
+
+    color:#e2e8f0;
+
+    font-size:.88rem;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.answer-box code{
+
+    font-family:"Fira Code", monospace;
+
+}
+
+
+
+// =====================================================
+// NOTE BOX (OPTIONAL)
+// =====================================================
+
+.note-box{
+
+    padding:16px;
+
+    border-radius:12px;
+
+    background:rgba(245,158,11,.08);
+
+    border-left:4px solid $orange;
+
+    color:$text-light;
+
+    line-height:1.7;
+
+}
+
+
+
+// =====================================================
+// SUCCESS BOX (OPTIONAL)
+// =====================================================
+
+.success-box{
+
+    padding:16px;
+
+    border-radius:12px;
+
+    background:rgba(34,197,94,.08);
+
+    border-left:4px solid $green;
+
+    color:$text-light;
+
+}
+
+
+
+// =====================================================
+// WARNING BOX (OPTIONAL)
+// =====================================================
+
+.warning-box{
+
+    padding:16px;
+
+    border-radius:12px;
+
+    background:rgba(239,68,68,.08);
+
+    border-left:4px solid $red;
+
+    color:$text-light;
+
+}
+
+.roadmap-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.roadmap-card{
+
+    position:relative;
+
+    padding-left:34px;
+
+}
+
+.timeline-dot{
+
+    width:14px;
+
+    height:14px;
+
+    background:$accent;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:0;
+
+    top:10px;
+
+}
+
+.timeline-dot::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:6px;
+
+    top:16px;
+
+    width:2px;
+
+    height:calc(100% + 30px);
+
+    background:rgba(255,45,120,.2);
+
+}
+
+.roadmap-card:last-child .timeline-dot::after{
+
+    display:none;
+
+}
+
+.roadmap-content{
+
+    background:$bg-card-light;
+
+    border-radius:18px;
+
+    border:1px solid $border;
+
+    padding:22px;
+
+}
+
+.sidebar-top {
+  margin-bottom: 28px;
+}
+
+.logout-btn {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  background: #ef4444;
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all .25s ease;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+.logout-btn svg {
+  font-size: 18px;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.home-btn,
+.logout-btn {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.home-btn {
+  background: #2563eb;
+}
+
+.home-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background: #ef4444;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+// =====================================================
+// ANIMATION
+// =====================================================
+
+@keyframes accordionOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
