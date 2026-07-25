@@ -149,7 +149,12 @@ Include realistic technical questions, behavioral questions, skill gaps, a day-w
 }
 
 async function generatePdfFromHtml(htmlContent){
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({
+    headless: true,
+    // Required by Chromium in restricted container environments such as Render.
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+  try {
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle0" })
 
@@ -162,9 +167,10 @@ async function generatePdfFromHtml(htmlContent){
         }
     })
 
-    await browser.close()
-
     return pdfBuffer
+  } finally {
+    await browser.close();
+  }
 }
 
 async function generateResumePDF({resume,selfDescription, jobDescription}){
