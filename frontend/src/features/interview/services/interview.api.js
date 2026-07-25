@@ -20,22 +20,22 @@ export const generateInterviewReport = async ({
   }
 
   // Do not set Content-Type manually — axios must add the multipart boundary
-  const response = await api.post("/api/interview/", formData);
+  const response = await api.post("/interview/", formData);
   return response.data;
 };
 
 export const getInterviewReportById = async (interviewId) => {
-  const response = await api.get(`/api/interview/report/${interviewId}`);
+  const response = await api.get(`/interview/report/${interviewId}`);
   return response.data;
 };
 
 export const getAllInterviewReports = async () => {
-  const response = await api.get("/api/interview/");
+  const response = await api.get("/interview/");
   return response.data;
 };
 
 export const generateResumePDF = async ({ interviewReportId }) => {
-    const response = await api.post(`/api/interview/resume/pdf/${interviewReportId}`, null, {
+    const response = await api.post(`/interview/resume/pdf/${interviewReportId}`, null, {
         responseType: "blob"
     })
 

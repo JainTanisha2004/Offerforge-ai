@@ -41,7 +41,7 @@ const api = axios.create({
 
 export const startMockInterview = async (reportId) => {
   const response = await api.post(
-    `/api/mock-interview/start/${reportId}`
+    `/mock-interview/start/${reportId}`
   );
 
   return response.data;
@@ -49,7 +49,7 @@ export const startMockInterview = async (reportId) => {
 
 export const getMockInterviewSession = async (sessionId) => {
   const response = await api.get(
-    `/api/mock-interview/session/${sessionId}`
+    `/mock-interview/session/${sessionId}`
   );
 
   return response.data;
@@ -61,7 +61,7 @@ export const evaluateAnswer = async (
   candidateAnswer
 ) => {
   const response = await api.post(
-    `/api/mock-interview/evaluate/${sessionId}`,
+    `/mock-interview/evaluate/${sessionId}`,
     {
       questionIndex,
       candidateAnswer,
@@ -73,13 +73,13 @@ export const evaluateAnswer = async (
 
 export const completeInterview = async (sessionId) => {
   const response = await api.post(
-    `/api/mock-interview/complete/${sessionId}`
+    `/mock-interview/complete/${sessionId}`
   );
 
   return response.data;
 };
 
 export const getInterviewHistory = async () => {
-  const response = await api.get("/api/mock-interview/history");
+  const response = await api.get("/mock-interview/history");
   return response.data;
 };
