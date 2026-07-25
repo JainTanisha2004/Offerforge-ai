@@ -32,7 +32,7 @@ const registerUserController=async(req,res)=>{
 
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: none,
+    sameSite: "none",
     secure: false,
   });
 
@@ -70,7 +70,7 @@ const loginUserController=async(req,res)=>{
 
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: none,
+    sameSite: "none",
     secure: false,
   });
 
