@@ -12,18 +12,25 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:5174",
+  "https://YOUR-VERCEL-APP.vercel.app",
 ];
 
+// app.use(cors({
+//   origin(origin, callback) {
+//     // Allow non-browser requests (no Origin) and known Vite ports
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     }
+//     return callback(new Error("Not allowed by CORS"));
+//   },
+//   credentials: true,
+// }))
+
 app.use(cors({
-  origin(origin, callback) {
-    // Allow non-browser requests (no Origin) and known Vite ports
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error("Not allowed by CORS"));
-  },
+  origin: true,
   credentials: true,
-}))
+}));
+
 const authRouter=require('./routes/auth.routes');
 const interviewRouter=require('./routes/interview.routes');
 app.use('/api/auth',authRouter);
