@@ -12,7 +12,6 @@ import {
   FiMessageCircle,
   FiMap,
   FiDownload,
-  FiChevronDown,
   FiLogOut,
   FiHome,
   FiPlay

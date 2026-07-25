@@ -12,25 +12,21 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:5174",
-  "https://offerforge-ai-zeta.vercel.app",
-  "*"
-];
-
-// app.use(cors({
-//   origin(origin, callback) {
-//     // Allow non-browser requests (no Origin) and known Vite ports
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       return callback(null, true);
-//     }
-//     return callback(new Error("Not allowed by CORS"));
-//   },
-//   credentials: true,
-// }))
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 app.use(cors({
-  origin: true,
+  origin(origin, callback) {
+    // Requests from tools such as Render health checks do not send Origin.
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
 }));
+
+app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 
 const authRouter=require('./routes/auth.routes');
 const interviewRouter=require('./routes/interview.routes');

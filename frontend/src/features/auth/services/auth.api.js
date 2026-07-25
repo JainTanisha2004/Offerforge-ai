@@ -18,7 +18,7 @@ export async function register({ username, email, password }) {
     });
     return response.data;
   } catch (err) {
-    throw new Error(getErrorMessage(err, "Registration failed"));
+    throw new Error(getErrorMessage(err, "Registration failed"), { cause: err });
   }
 }
 
@@ -30,7 +30,7 @@ export async function login({ email, password }) {
     });
     return response.data;
   } catch (err) {
-    throw new Error(getErrorMessage(err, "Login failed"));
+    throw new Error(getErrorMessage(err, "Login failed"), { cause: err });
   }
 }
 
@@ -39,7 +39,7 @@ export async function logout() {
     const response = await api.get("/auth/logout");
     return response.data;
   } catch (err) {
-    throw new Error(getErrorMessage(err, "Logout failed"));
+    throw new Error(getErrorMessage(err, "Logout failed"), { cause: err });
   }
 }
 

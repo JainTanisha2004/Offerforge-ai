@@ -79,9 +79,8 @@ export const useInterview = () => {
 
   const getResumePdf = async (interviewReportId) => {
         setLoading(true)
-        let response = null
         try {
-            response = await generateResumePDF({ interviewReportId })
+            const response = await generateResumePDF({ interviewReportId })
             const url = window.URL.createObjectURL(new Blob([ response ], { type: "application/pdf" }))
             const link = document.createElement("a")
             link.href = url

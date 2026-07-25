@@ -251,25 +251,6 @@ const MockInterview = () => {
 
   const navigate = useNavigate();
 
-  const dummyFeedback = {
-    score: 8.5,
-
-    strengths: [
-      "Explained JWT clearly.",
-      "Mentioned Payload and Signature.",
-      "Used good terminology.",
-    ],
-
-    weaknesses: [
-      "Didn't explain Refresh Tokens.",
-      "Missed Token Expiry.",
-      "No real-world example.",
-    ],
-
-    idealAnswer:
-      "JWT consists of Header, Payload and Signature. During authentication, the server verifies the signature before allowing access. Refresh Tokens are used to generate new Access Tokens without requiring the user to log in again.",
-  };
-
   useEffect(() => {
     const loadInterview = async () => {
       try {
@@ -287,30 +268,27 @@ const MockInterview = () => {
   }, [sessionId]);
 
   useEffect(() => {
-  if (timeLeft <= 0) {
-    setSubmitted(true);
+    if (submitted) return undefined;
 
-    setFeedback({
-      score: 0,
-      strengths: [],
-      weaknesses: [
-        "Time expired before submitting the answer."
-      ],
-      idealAnswer:
-        "Try to manage your time by explaining the main concept first."
-    });
+    const timer = setInterval(() => {
+      setTimeLeft((previousTime) => {
+        const nextTime = Math.max(previousTime - 1, 0);
+        if (nextTime === 0) {
+          clearInterval(timer);
+          setSubmitted(true);
+          setFeedback({
+            score: 0,
+            strengths: [],
+            weaknesses: ["Time expired before submitting the answer."],
+            idealAnswer: "Try to manage your time by explaining the main concept first.",
+          });
+        }
+        return nextTime;
+      });
+    }, 1000);
 
-    return;
-  }
-
-  const timer = setInterval(() => {
-    setTimeLeft(prev => prev - 1);
-  },1000);
-
-
-  return () => clearInterval(timer);
-
-},[timeLeft]);
+    return () => clearInterval(timer);
+  }, [submitted]);
 
   if (loading) {
     return (
