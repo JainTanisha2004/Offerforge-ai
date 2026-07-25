@@ -16,6 +16,7 @@ $accent-light:rgba(255,45,120,.12);
 $green:#22c55e;
 $orange:#f59e0b;
 $red:#ef4444;
+$blue:#3b82f6;
 
 $border:rgba(255,255,255,.08);
 
@@ -227,9 +228,9 @@ body{
 
 
 // ========================================
-// DOWNLOAD BUTTON
+// DOWNLOAD / MOCK BUTTON
 // ========================================
-
+.mock-btn,
 .download-btn{
 
     width:100%;
@@ -270,6 +271,7 @@ body{
 
 }
 
+.mock-btn:hover,
 .download-btn:hover{
 
     transform:translateY(-3px);
@@ -278,6 +280,15 @@ body{
 
         0 15px 35px rgba(255,45,120,.28);
 
+}
+
+.mock-btn{
+    margin-top:12px;
+    background:linear-gradient(135deg,#3b82f6,#60a5fa);
+}
+
+.mock-btn:hover{
+    box-shadow:0 15px 35px rgba(59,130,246,.28);
 }
 
 
@@ -378,7 +389,7 @@ body{
 
     flex-direction:column;
 
-    gap:18px;
+    gap:22px;
 
 }
 
@@ -406,19 +417,313 @@ body{
 
 }
 
+
 // =====================================================
-// QUESTIONS CONTAINER
+// SCORE CARD
 // =====================================================
 
-.questions{
+.score-card{
 
     display:flex;
 
     flex-direction:column;
 
-    gap:22px;
+    align-items:center;
 
-    width:100%;
+    gap:18px;
+
+    text-align:center;
+
+    padding:26px 20px 30px;
+
+    border-radius:18px;
+
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255,45,120,.14), transparent 60%),
+        $bg-card-light;
+
+    border:1px solid $border;
+
+}
+
+.score-card > p{
+
+    color:$text-light;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+}
+
+.score-circle{
+
+    position:relative;
+
+    width:132px;
+
+    height:132px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:2.5rem;
+
+    font-weight:800;
+
+    color:$text;
+
+    background:
+
+        conic-gradient(
+            $accent 0deg,
+            #ff5d98 210deg,
+            rgba(255,255,255,.06) 210deg 360deg
+        );
+
+    box-shadow:
+
+        0 0 0 1px rgba(255,255,255,.05),
+
+        0 20px 40px rgba(255,45,120,.22);
+
+    animation:scorePop .5s ease;
+
+}
+
+.score-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:10px;
+
+    border-radius:50%;
+
+    background:$bg-card-light;
+
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+
+    z-index:-1;
+
+}
+
+.score-circle small{
+
+    position:relative;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:$text-light;
+
+    margin-left:2px;
+
+    align-self:flex-start;
+
+    margin-top:6px;
+
+}
+
+.score-circle{
+
+    // ensure number + % sit above the ::before pseudo layer
+    > * { position:relative; }
+
+}
+
+@keyframes scorePop{
+
+    from{
+
+        transform:scale(.85);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+// =====================================================
+// SKILL GAPS CARD
+// =====================================================
+
+.skills-card{
+
+    padding:24px 22px;
+
+    border-radius:18px;
+
+    background:$bg-card-light;
+
+    border:1px solid $border;
+
+}
+
+.skills-card h4{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    color:$text;
+
+    margin-bottom:18px;
+
+    padding-bottom:14px;
+
+    border-bottom:1px solid $border;
+
+}
+
+.skills-card h4::before{
+
+    content:"";
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:$accent;
+
+    box-shadow:0 0 0 4px rgba(255,45,120,.18);
+
+}
+
+.skills{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.skills span{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:9px 14px;
+
+    border-radius:12px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    letter-spacing:.2px;
+
+    background:#243246;
+
+    color:$text-light;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.25s ease;
+
+    cursor:default;
+
+}
+
+.skills span::before{
+
+    content:"";
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+    background:currentColor;
+
+}
+
+.skills span:hover{
+
+    transform:translateY(-2px);
+
+    border-color:currentColor;
+
+}
+
+// severity variants — covers common naming conventions
+// so the tags always look right regardless of which
+// strings the backend sends (low/med/high, minor/moderate/critical, etc.)
+
+.skills span.low,
+.skills span.minor,
+.skills span.easy{
+
+    background:rgba(34,197,94,.12);
+
+    color:$green;
+
+}
+
+.skills span.medium,
+.skills span.moderate,
+.skills span.mid{
+
+    background:rgba(245,158,11,.12);
+
+    color:$orange;
+
+}
+
+.skills span.high,
+.skills span.major,
+.skills span.hard{
+
+    background:rgba(239,68,68,.12);
+
+    color:$red;
+
+}
+
+.skills span.critical,
+.skills span.severe{
+
+    background:rgba(239,68,68,.18);
+
+    color:#ff6b6b;
+
+    border-color:rgba(239,68,68,.4);
 
 }
 
@@ -808,13 +1113,21 @@ body{
 
 }
 
+
+// =====================================================
+// ROADMAP
+// =====================================================
+// note: the JSX renders .roadmap-card as a direct child of
+// .content (no .roadmap-list wrapper), so spacing is handled
+// with margin-bottom on the card itself rather than a parent gap.
+
 .roadmap-list{
 
     display:flex;
 
     flex-direction:column;
 
-    gap:22px;
+    gap:26px;
 
 }
 
@@ -822,15 +1135,25 @@ body{
 
     position:relative;
 
-    padding-left:34px;
+    padding-left:40px;
+
+    margin-bottom:26px;
+
+    animation:accordionOpen .35s ease;
+
+}
+
+.roadmap-card:last-child{
+
+    margin-bottom:0;
 
 }
 
 .timeline-dot{
 
-    width:14px;
+    width:16px;
 
-    height:14px;
+    height:16px;
 
     background:$accent;
 
@@ -840,7 +1163,11 @@ body{
 
     left:0;
 
-    top:10px;
+    top:6px;
+
+    box-shadow:
+        0 0 0 5px rgba(255,45,120,.15),
+        0 6px 14px rgba(255,45,120,.35);
 
 }
 
@@ -850,15 +1177,19 @@ body{
 
     position:absolute;
 
-    left:6px;
+    left:7px;
 
-    top:16px;
+    top:22px;
 
     width:2px;
 
-    height:calc(100% + 30px);
+    height:calc(100% + 4px);
 
-    background:rgba(255,45,120,.2);
+    background:linear-gradient(
+        to bottom,
+        rgba(255,45,120,.35),
+        rgba(255,45,120,.05)
+    );
 
 }
 
@@ -876,46 +1207,121 @@ body{
 
     border:1px solid $border;
 
-    padding:22px;
+    padding:24px 26px;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
 
 }
 
-.sidebar-top {
-  margin-bottom: 28px;
+.roadmap-content:hover{
+
+    transform:translateY(-3px);
+
+    border-color:rgba(255,45,120,.3);
+
+    box-shadow:0 18px 32px rgba(0,0,0,.25);
+
 }
 
-.logout-btn {
-  width: 100%;
+.roadmap-header{
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    display:flex;
 
-  padding: 12px 16px;
+    align-items:center;
 
-  border: none;
-  border-radius: 12px;
+    gap:14px;
 
-  cursor: pointer;
+    margin-bottom:16px;
 
-  background: #ef4444;
-  color: #fff;
+    flex-wrap:wrap;
 
-  font-size: 15px;
-  font-weight: 600;
-
-  transition: all .25s ease;
 }
 
-.logout-btn:hover {
-  background: #dc2626;
-  transform: translateY(-2px);
+.roadmap-header span{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+
+    background:$accent-light;
+
+    color:$accent;
+
+    border:1px solid rgba(255,45,120,.25);
+
 }
 
-.logout-btn svg {
-  font-size: 18px;
+.roadmap-header h3{
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:$text;
+
 }
+
+.roadmap-content ul{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    list-style:none;
+
+}
+
+.roadmap-content li{
+
+    position:relative;
+
+    padding-left:22px;
+
+    color:$text-light;
+
+    font-size:.92rem;
+
+    line-height:1.6;
+
+}
+
+.roadmap-content li::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:8px;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:3px;
+
+    background:linear-gradient(135deg,#ff2d78,#ff5d98);
+
+}
+
 
 .sidebar-top {
   display: flex;
@@ -966,6 +1372,10 @@ body{
   transform: translateY(-2px);
 }
 
+.logout-btn svg {
+  font-size: 18px;
+}
+
 // =====================================================
 // ANIMATION
 // =====================================================
@@ -988,4 +1398,67 @@ body{
 
     }
 
+}
+
+/* Page-specific polish and responsive layout. */
+.history-btn {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  background: transparent;
+  color: #e2e8f0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.history-btn:hover {
+  background: rgba(255,45,120,.1);
+  border-color: rgba(255,45,120,.45);
+  color: #fff;
+}
+
+.loading-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #080d17;
+  color: #e2e8f0;
+}
+
+@media (max-width: 1280px) {
+  .layout { grid-template-columns: 210px minmax(0, 1fr); }
+  .interview-page > .layout > .right-panel {
+    grid-column: 2;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .interview-page { padding: 16px; }
+  .layout { grid-template-columns: 1fr; gap: 16px; }
+  .sidebar { position: static; padding: 16px; }
+  .sidebar > div:last-of-type { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .sidebar h5 { grid-column: 1 / -1; margin-bottom: 4px; }
+  .nav-btn { margin-bottom: 0; padding: 0 12px; gap: 8px; justify-content: center; }
+  .content { padding: 24px 18px; min-height: 0; }
+  .interview-page > .layout > .right-panel { grid-column: auto; grid-template-columns: 1fr; padding: 18px; }
+  .section-header { gap: 14px; margin-bottom: 22px; }
+  .roadmap-card { padding-left: 32px; margin-bottom: 20px; }
+}
+
+@media (max-width: 540px) {
+  .sidebar > div:last-of-type { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; }
+  .section-header h2 { font-size: 1.55rem; }
+  .question-card__header { padding: 18px; }
+  .question-card__left { gap: 12px; }
+  .question-number { width: 36px; height: 36px; min-width: 36px; }
+  .question-card__body { padding: 0 18px 18px; }
+  .score-circle { width: 112px; height: 112px; font-size: 2rem; }
+  .roadmap-content { padding: 20px; }
 }

@@ -2,6 +2,7 @@ const express=require('express');
 const app=express();
 const cookieParser=require("cookie-parser");
 const cors=require("cors");
+const mockInterviewRoutes = require("./routes/mockInterview.routes");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -27,4 +28,5 @@ const authRouter=require('./routes/auth.routes');
 const interviewRouter=require('./routes/interview.routes');
 app.use('/api/auth',authRouter);
 app.use("/api/interview",interviewRouter)
+app.use("/api/mock-interview", mockInterviewRoutes);
 module.exports=app;

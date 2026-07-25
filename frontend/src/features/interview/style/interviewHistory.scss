@@ -1,0 +1,133 @@
+.history-page {
+  min-height: 100vh;
+  background: #080d17;
+  color: #fff;
+  padding: 40px;
+}
+
+.history-header {
+  margin-bottom: 40px;
+}
+
+.history-header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.history-header p {
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+.history-card {
+  background: #111827;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #1f2937;
+  transition: all 0.25s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+}
+
+.history-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.history-card__header h3 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.completed {
+  background: rgba(34, 197, 94, .15);
+  color: #22c55e;
+}
+
+.history-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cbd5e1;
+}
+
+.history-item svg {
+  color: #3b82f6;
+  font-size: 18px;
+}
+
+.history-card__footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff2d78;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.view-btn:hover {
+  background: #e11d62;
+}
+
+.history-loading,
+.empty-history {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.empty-history button {
+  background: #ff2d78;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .history-page { padding: 28px 16px; }
+  .history-header { margin-bottom: 28px; }
+  .history-header h1 { font-size: 1.85rem; }
+  .history-grid { grid-template-columns: 1fr; gap: 16px; }
+  .history-card { padding: 18px; }
+  .history-card__header h3 { font-size: 1.1rem; }
+}

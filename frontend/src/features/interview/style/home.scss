@@ -78,7 +78,7 @@
 }
 
 .left-panel,
-.right-panel{
+.home-right-panel{
 
     display:flex;
 
@@ -130,7 +130,7 @@
 
 }
 
-.right-panel{
+.home-right-panel{
 
     gap:20px;
 
@@ -258,7 +258,7 @@
 
 }
 
-.right-panel textarea{
+.home-right-panel textarea{
 
     height:150px;
 
@@ -523,4 +523,93 @@ textarea::placeholder{
 
     }
 
+    .left-panel textarea{
+
+        min-height:380px;
+
+    }
+
+}
+
+/* Final polish: keep the editor controls clear and touch-friendly. */
+.home .left-panel textarea,
+.home .home-right-panel textarea {
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.home .left-panel textarea:focus,
+.home .home-right-panel textarea:focus {
+  border-color: rgba(255,63,136,.75);
+  box-shadow: 0 0 0 4px rgba(255,63,136,.12);
+}
+
+/* ===========================
+   TABLET (860px and below)
+   fixes the logout button overlapping
+   the centered hero on iPad-sized screens,
+   and scales the hero/workspace down a step
+   before the phone breakpoint kicks in.
+=========================== */
+@media (max-width: 860px) {
+  .home { padding: 48px 24px; }
+
+  .home-logout-btn {
+    position: static;
+    margin: 0 0 24px auto;
+  }
+
+  .hero { margin-bottom: 34px; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 1rem; }
+
+  .workspace { padding: 22px; gap: 22px; }
+
+  .reports-list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home { padding: 32px 16px; }
+  .hero { margin-bottom: 30px; text-align: left; }
+  .hero h1 { font-size: 2.2rem; }
+  .workspace { padding: 16px; border-radius: 20px; gap: 20px; }
+  .left-panel textarea { min-height: 300px; }
+  .upload-box { height: 180px; }
+  .button-wrapper { margin-top: 28px; }
+  .button-wrapper button { width: 100%; justify-content: center; padding: 16px 20px; }
+  .home-logout-btn { position: static; margin-left: auto; margin-bottom: 24px; }
+}
+
+/* ===========================
+   SMALL PHONES (420px and below)
+=========================== */
+@media (max-width: 420px) {
+  .home { padding: 24px 14px; }
+  .hero h1 { font-size: 1.85rem; }
+  .hero p { font-size: .92rem; }
+
+  .panel-title { font-size: 1.1rem; margin-bottom: 14px; }
+
+  .workspace { padding: 14px; gap: 16px; }
+  .left-panel textarea { min-height: 240px; padding: 16px; font-size: 14px; }
+  .home-right-panel textarea { height: 120px; padding: 14px; }
+
+  .upload-box { height: 150px; border-radius: 16px; }
+  .upload-box h4 { font-size: .95rem; }
+  .upload-box p { font-size: .82rem; }
+
+  .field { gap: 8px; }
+
+  .note { padding: 12px; font-size: .82rem; }
+
+  .button-wrapper button { padding: 14px 16px; font-size: .95rem; }
+
+  .recent-reports { margin-top: 3rem; }
+  .recent-reports h2 { font-size: 1.3rem; }
+
+  .report-item { padding: 1.1rem; }
+  .report-item h3 { font-size: 1.02rem; }
+
+  .home-logout-btn { padding: 10px 14px; font-size: 14px; }
 }

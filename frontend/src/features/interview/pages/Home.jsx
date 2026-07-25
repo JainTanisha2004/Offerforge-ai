@@ -134,7 +134,7 @@ const Home = () => {
             <div className="counter">{jobDescription.length} / 5000</div>
           </div>
 
-          <div className="right-panel">
+          <div className="home-right-panel">
             <div className="panel-title">👤 Your Profile</div>
 
             <div className="field">

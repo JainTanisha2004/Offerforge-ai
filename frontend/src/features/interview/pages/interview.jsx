@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 //import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { startMockInterview } from "../services/mockInterview.api";
 
 import {
   FiCode,
@@ -13,7 +14,8 @@ import {
   FiDownload,
   FiChevronDown,
   FiLogOut,
-  FiHome
+  FiHome,
+  FiPlay
 } from "react-icons/fi";
 
 
@@ -101,6 +103,16 @@ const { handleLogout } = useAuth();
   navigate("/");
 };
 
+  const startInterview = async () => {
+    try {
+      const { sessionId } = await startMockInterview(interviewId);
+      navigate(`/interview/session/${sessionId}`);
+    } catch (error) {
+      console.error("Unable to start mock interview", error);
+      alert(error.response?.data?.message || "Unable to start mock interview.");
+    }
+  };
+
   const logoutUser = async () => {
   try {
     await handleLogout();
@@ -170,6 +182,21 @@ const { handleLogout } = useAuth();
             <FiDownload />
             Download Resume
           </button>
+
+          <button
+  className="mock-btn"
+  onClick={startInterview}
+>
+  <FiPlay />
+  Start AI Mock Interview
+</button>
+
+<button
+  className="history-btn"
+  onClick={() => navigate("/interview-history")}
+>
+  Mock Interview History
+</button>
         </aside>
 
         {/* CENTER */}

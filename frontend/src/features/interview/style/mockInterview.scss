@@ -1,0 +1,494 @@
+/* ==========================================
+   BASE / RESET
+   box-sizing is the key fix: without it, padding
+   was pushing real element edges outside their
+   visual containers, which is what made clicks
+   on the textarea/buttons miss their targets.
+========================================== */
+
+.mock-interview-page,
+.mock-interview-page * {
+  box-sizing: border-box;
+}
+
+.mock-interview-page {
+  min-height: 100vh;
+  background: #080d17;
+  color: white;
+}
+
+/* ==========================================
+   LAYOUT
+   Only ONE element now owns min-height: 100vh
+   (mock-layout). Sidebar and main just stretch
+   to fill it — no more nested 100vh containers
+   fighting each other / covering each other.
+========================================== */
+
+.mock-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mock-main {
+  flex: 1;
+  min-width: 0; /* prevents flex child from overflowing and covering the sidebar */
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.interview-content {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.interview-sidebar {
+  width: 260px;
+  flex-shrink: 0; /* stops sidebar from being squeezed/overlapped on smaller viewports */
+  background: #111827;
+  border-right: 1px solid rgba(255, 255, 255, .06);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin-bottom: 28px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: .25s;
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .label {
+    color: #cbd5e1;
+    font-size: 15px;
+  }
+
+  &.pending .dot {
+    background: #475569;
+  }
+
+  &.completed {
+    background: rgba(34, 197, 94, .1);
+
+    .dot { background: #22c55e; }
+    .label { color: #22c55e; }
+  }
+
+  &.current {
+    background: rgba(255, 45, 120, .12);
+
+    .dot { background: #ff2d78; }
+    .label { color: #ffffff; font-weight: 600; }
+  }
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.interview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.header-left {
+  h1 {
+    color: white;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #94a3b8;
+    font-size: 18px;
+  }
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, .08);
+  padding: 14px 20px;
+  border-radius: 14px;
+
+  svg {
+    color: #ff2d78;
+    font-size: 20px;
+  }
+
+  span {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+/* ==========================================
+   QUESTION PANEL
+========================================== */
+
+.question-panel {
+  position: relative; /* gives it its own stacking context so nothing from
+                          the layout above can accidentally sit on top of it */
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 18px;
+  padding: 32px;
+  width: 100%;
+  animation: fadeIn .3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+.question-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.category-badge,
+.difficulty-badge {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.category-badge {
+  background: rgba(255, 45, 120, .12);
+  color: #ff2d78;
+}
+
+.difficulty-badge {
+  &.medium { background: rgba(245, 158, 11, .15); color: #f59e0b; }
+  &.easy   { background: rgba(34, 197, 94, .12);  color: #22c55e; }
+  &.hard   { background: rgba(239, 68, 68, .12);  color: #ef4444; }
+}
+
+.question-title {
+  color: white;
+  font-size: 34px;
+  line-height: 1.5;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   ANSWER EDITOR
+========================================== */
+
+.answer-editor {
+  position: relative;
+  margin-top: 28px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 18px;
+  padding: 24px;
+
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 240px;
+    resize: vertical;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    padding: 18px;
+    background: #182233;
+    color: white;
+    font-size: 16px;
+    line-height: 1.7;
+    transition: .25s;
+    font-family: inherit;
+    position: relative; /* ensures it stays above any sibling background layers */
+    z-index: 1;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(255, 45, 120, .35);
+    }
+  }
+}
+
+.editor-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.editor-info {
+  display: flex;
+  gap: 18px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, .1);
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .25s;
+
+  &:hover {
+    background: #1f2937;
+  }
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff2d78;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: .25s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(255, 45, 120, .35);
+  }
+}
+
+/* ==========================================
+   FEEDBACK PANEL
+========================================== */
+
+.feedback-panel {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feedback-score {
+  position: relative;
+  overflow: hidden;
+  background: #111827;
+  border-radius: 18px;
+  padding: 34px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  /* soft accent glow bleeding in from the score side, ties the
+     card together instead of the circle looking like it was
+     just dropped on a plain panel */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(255, 45, 120, .16), transparent 70%);
+    pointer-events: none;
+  }
+
+  h2 {
+    position: relative;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .score-circle {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .22), transparent 55%),
+      linear-gradient(135deg, #ff2d78, #c2166b);
+
+    box-shadow:
+      0 0 0 6px rgba(255, 45, 120, .12),
+      0 18px 40px rgba(255, 45, 120, .35),
+      inset 0 2px 6px rgba(255, 255, 255, .25),
+      inset 0 -10px 18px rgba(0, 0, 0, .25);
+
+    color: white;
+    text-align: center;
+
+    span {
+      display: block;
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    small {
+      display: block;
+      width: 100%;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-align: center;
+      color: rgba(255, 255, 255, .8);
+    }
+  }
+}
+
+.feedback-card {
+  background: #111827;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    margin-bottom: 15px;
+
+    svg {
+      color: #22c55e;
+    }
+  }
+
+  ul {
+    padding-left: 18px;
+    color: #cbd5e1;
+    line-height: 1.8;
+  }
+
+  p {
+    color: #cbd5e1;
+    line-height: 1.8;
+  }
+
+  &.warning h3 svg {
+    color: #f59e0b;
+  }
+}
+
+.next-btn {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ff2d78;
+  color: white;
+  border: none;
+  padding: 14px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: .25s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.mock-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  background: #080d17;
+  color: #f8fafc;
+}
+
+@media (max-width: 760px) {
+  .mock-layout { display: block; }
+  .interview-sidebar { width: 100%; padding: 20px 16px; }
+  .progress-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .progress-item { padding: 9px 10px; gap: 8px; }
+  .progress-item .label { font-size: .85rem; }
+  .mock-main { padding: 24px 16px; overflow: visible; }
+  .interview-header { gap: 16px; align-items: flex-start; }
+  .header-left h1 { font-size: 1.8rem; }
+  .header-left p { font-size: 1rem; }
+  .timer { padding: 10px 12px; }
+  .question-panel, .answer-editor { padding: 20px 16px; }
+  .question-title { font-size: 1.55rem; }
+  .editor-footer { align-items: stretch; flex-direction: column; gap: 16px; }
+  .editor-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .clear-btn, .submit-btn { justify-content: center; }
+
+  .feedback-score {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 22px;
+  }
+
+  .feedback-score .score-circle {
+    width: 110px;
+    height: 110px;
+  }
+
+  .feedback-score .score-circle span {
+    font-size: 32px;
+  }
+}
